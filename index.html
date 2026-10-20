@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veien til Paralympics – Norges Paralandslag i Klatring</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0E0E0E;
+      --dark: #161616;
+      --card: #1E1E1E;
+      --red: #C23E28;
+      --red-light: #D44830;
+      --cream: #F2EBE0;
+      --muted: #7A7A7A;
+      --border: #2A2A2A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: linear-gradient(to bottom, rgba(14,14,14,0.95), transparent);
+      backdrop-filter: blur(4px);
+    }
+    .nav-logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-cta {
+      background: var(--red);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--red-light); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      overflow: hidden;
+      background-image: url('hero_bg.jpg');
+      background-size: cover;
+      background-position: center 70%;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(14,14,14,0.88) 0%,
+        rgba(14,14,14,0.72) 50%,
+        rgba(14,14,14,0.95) 100%);
+      pointer-events: none;
+    }
+    .hero-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--cream);
+      margin-bottom: 28px;
+      max-width: 900px;
+    }
+    .hero h1 em { font-style: normal; color: var(--red); }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 300;
+      color: #D5CEC6;
+      max-width: 600px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--red), transparent);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* VIDEO */
+    .video-section {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      gap: 12px;
+    }
+    .video-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
+    .video-placeholder p { font-size: 14px; }
+
+    /* SECTION SHARED */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-header h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+    }
+    .section-header p {
+      font-size: 17px;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 560px;
+      margin: 12px auto 0;
+      line-height: 1.7;
+    }
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--red);
+      border-radius: 2px;
+      margin: 0 auto 0;
+    }
+
+    /* ATHLETES */
+    .athletes-section { padding: 0 24px 100px; }
+
+    /* Featured athlete - full width strip */
+    .athlete-featured {
+      max-width: 1100px;
+      margin: 0 auto 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      min-height: 480px;
+    }
+    .athlete-featured-photo {
+      position: relative;
+      overflow: hidden;
+    }
+    .athlete-featured-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+    .athlete-featured-info {
+      background: var(--card);
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .athlete-featured-info .athlete-class {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+    .athlete-featured-info h3 {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 900;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .athlete-featured-info p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .athlete-result {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(194,62,40,0.12);
+      border: 1px solid rgba(194,62,40,0.25);
+      border-radius: 4px;
+      padding: 8px 14px;
+      font-size: 13px;
+      color: var(--cream);
+      font-weight: 500;
+      margin-top: 24px;
+      width: fit-content;
+    }
+    .athlete-result span { color: var(--red); font-weight: 700; }
+
+    /* Secondary athletes row */
+    .athletes-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto 60px;
+    }
+    .athlete-card {
+      background: var(--card);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .athlete-card:hover { transform: translateY(-4px); border-color: var(--red); }
+    .athlete-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: #1A1A1A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--border);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      overflow: hidden;
+    }
+    .athlete-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .athlete-info { padding: 18px 20px 22px; }
+    .athlete-class {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 5px;
+    }
+    .athlete-info h3 { font-size: 18px; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
+    .athlete-info p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* FADE UP ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+
+    /* COACH */
+    .coach-card {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--dark);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 32px;
+      overflow: hidden;
+    }
+    .coach-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid var(--border);
+    }
+    .coach-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .coach-role {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+    .coach-card h3 { font-size: 20px; font-weight: 700; color: var(--cream); margin-bottom: 6px; }
+    .coach-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* STATS */
+    .stats-section {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 24px;
+    }
+    .stats-grid {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .stat-item {
+      flex: 1;
+      min-width: 160px;
+      text-align: center;
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 900;
+      color: var(--cream);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-number span { color: var(--red); }
+    .stat-label { font-size: 12px; color: var(--muted); line-height: 1.4; font-weight: 400; }
+
+    /* QUOTE */
+    .quote-section {
+      padding: 100px 24px;
+      text-align: center;
+      position: relative;
+      background-image: url('team_bg.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .quote-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(14,14,14,0.82);
+      pointer-events: none;
+    }
+    .quote-inner { position: relative; z-index: 1; }
+    blockquote {
+      max-width: 740px;
+      margin: 0 auto;
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+    .quote-author {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    /* COUNTDOWN */
+    .countdown-section { padding: 80px 24px; text-align: center; background: var(--dark); }
+    .countdown-title { font-size: clamp(18px, 2.5vw, 24px); font-weight: 300; color: var(--muted); margin-bottom: 48px; }
+    .countdown-grid { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .countdown-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .countdown-number {
+      font-size: clamp(52px, 8vw, 80px);
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown-unit { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .countdown-sep { font-size: 60px; font-weight: 100; color: var(--border); line-height: 1; align-self: flex-start; padding-top: 10px; }
+
+    /* INTRO */
+    .intro-outer {
+      background-image: url('climbing_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .intro-outer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(14,14,14,0.88);
+      pointer-events: none;
+    }
+    .intro-section { max-width: 820px; margin: 0 auto; padding: 100px 24px; text-align: center; position: relative; z-index: 1; }
+    .intro-section h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 24px; color: var(--cream); }
+    .intro-section p { font-size: 18px; font-weight: 300; color: #A0998F; line-height: 1.8; margin-bottom: 16px; }
+
+    /* TIMELINE */
+    .timeline-section { padding: 0 24px 100px; background: var(--black); }
+    .timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+      transform: translateX(-50%);
+    }
+    .timeline-item { display: flex; gap: 40px; margin-bottom: 48px; position: relative; }
+    .timeline-content {
+      flex: 1;
+      padding: 24px 28px;
+      background: var(--card);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .timeline-item.current .timeline-content { border-color: var(--red); background: rgba(194,62,40,0.07); }
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      top: 24px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 2px solid var(--black);
+      transform: translateX(-50%);
+    }
+    .timeline-item.current .timeline-dot { background: var(--red); box-shadow: 0 0 0 4px rgba(194,62,40,0.2); }
+    .timeline-date { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .timeline-content h3 { font-size: 17px; font-weight: 600; color: var(--cream); margin-bottom: 6px; }
+    .timeline-content p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .timeline-spacer { flex: 1; }
+
+    /* SPONSOR PACKAGES */
+    .sponsor-section {
+      padding: 100px 24px;
+      background-image: url('team_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .sponsor-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(14,14,14,0.91);
+      pointer-events: none;
+    }
+    .sponsor-inner { position: relative; z-index: 1; }
+    .packages-list {
+      max-width: 860px;
+      margin: 0 auto 64px;
+    }
+    .package-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      align-items: start;
+    }
+    .package-row:last-child { border-bottom: 1px solid var(--border); }
+    .package-left { }
+    .package-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .package-row h3 { font-size: 22px; font-weight: 700; color: var(--cream); line-height: 1.2; }
+    .package-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .package-features li {
+      font-size: 15px;
+      color: #A8A096;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      line-height: 1.5;
+    }
+    .package-features li::before {
+      content: '—';
+      color: var(--red);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .sponsor-cta-wrap { text-align: center; position: relative; z-index: 1; }
+    .cta-button {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      padding: 18px 44px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cta-button:hover { background: var(--red-light); transform: translateY(-2px); }
+    .cta-sub { margin-top: 14px; font-size: 13px; color: var(--muted); }
+    .cta-sub a { color: var(--red); text-decoration: none; }
+
+    /* CLASSES */
+    .classes-section { padding: 100px 24px; background: var(--dark); }
+    .classes-grid-new {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .class-card-new {
+      background: var(--card);
+      padding: 36px 32px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .class-card-new::before {
+      content: attr(data-class);
+      position: absolute;
+      top: -10px;
+      right: 16px;
+      font-size: 120px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(194,62,40,0.08);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      user-select: none;
+    }
+    .class-tag {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+    .class-card-new h3 { font-size: 17px; font-weight: 700; color: var(--cream); margin-bottom: 10px; position: relative; z-index: 1; }
+    .class-card-new p { font-size: 14px; color: #A8A096; line-height: 1.6; margin-bottom: 16px; position: relative; z-index: 1; }
+    .class-la28 {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      border-left: 2px solid var(--red);
+      padding-left: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* SCHEDULE */
+    .schedule-section {
+      padding: 100px 24px;
+      background-image: url('climbing_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .schedule-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(14,14,14,0.93);
+      pointer-events: none;
+    }
+    .schedule-section .section-header,
+    .schedule-list { position: relative; z-index: 1; }
+    .schedule-list { max-width: 860px; margin: 0 auto; }
+    .schedule-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 40px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      align-items: start;
+    }
+    .schedule-row:last-child { border-bottom: 1px solid var(--border); }
+    .schedule-meta { display: flex; flex-direction: column; gap: 4px; }
+    .schedule-date { font-size: 15px; font-weight: 700; color: var(--cream); }
+    .schedule-phase { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); }
+    .schedule-events { display: flex; flex-direction: column; gap: 12px; }
+    .sched-event { display: flex; align-items: baseline; gap: 18px; }
+    .sched-time { font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; min-width: 38px; }
+    .sched-desc { font-size: 15px; color: #A8A096; line-height: 1.4; }
+
+    /* INSTAGRAM */
+    .instagram-section { padding: 80px 24px; text-align: center; }
+    .instagram-section h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--cream); margin-bottom: 12px; }
+    .instagram-section p { font-size: 16px; color: var(--muted); margin-bottom: 28px; }
+    .instagram-handle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 24px;
+      text-decoration: none;
+      color: var(--cream);
+      font-size: 15px;
+      font-weight: 600;
+      transition: border-color 0.2s;
+    }
+    .instagram-handle:hover { border-color: var(--red); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 36px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer a { color: var(--red); text-decoration: none; }
+
+    /* ATHLETE MODAL */
+    .athlete-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .athlete-modal.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+    }
+    .modal-box {
+      position: relative;
+      z-index: 1;
+      background: #1A1A1A;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 860px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      transform: translateY(20px);
+      transition: transform 0.25s ease;
+    }
+    .athlete-modal.open .modal-box {
+      transform: translateY(0);
+    }
+    .modal-photo-col {
+      position: relative;
+      min-height: 480px;
+    }
+    .modal-photo-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 11px 0 0 11px;
+      display: block;
+    }
+    .modal-info-col {
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 2;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: var(--red); border-color: var(--red); }
+    .modal-class-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+    .modal-name {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .modal-bio {
+      font-size: 15px;
+      color: #A8A096;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .modal-result {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--cream);
+      background: rgba(194,62,40,0.1);
+      border-left: 3px solid var(--red);
+      padding: 10px 14px;
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 28px;
+    }
+    .modal-video-block {
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+    .modal-video-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .modal-video-placeholder {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--muted);
+    }
+    .modal-video-placeholder svg { width: 36px; height: 36px; opacity: 0.4; }
+    .modal-video-placeholder p { font-size: 13px; opacity: 0.6; }
+    .modal-video-iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 6px;
+      border: none;
+    }
+
+    /* Clickable cards */
+    .athlete-featured, .athlete-card {
+      cursor: pointer;
+    }
+    .athlete-card { transition: transform 0.2s ease; }
+    .athlete-card:hover { transform: translateY(-4px); }
+    .athlete-featured-photo { transition: opacity 0.2s; }
+    .athlete-featured:hover .athlete-featured-photo { opacity: 0.92; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .timeline::before { left: 20px; }
+      .timeline-item, .timeline-item:nth-child(odd) { flex-direction: column; }
+      .timeline-item:nth-child(odd) .timeline-content { text-align: left; }
+      .timeline-dot { left: 20px; }
+      .timeline-spacer { display: none; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .coach-card { flex-direction: column; text-align: center; }
+      footer { flex-direction: column; text-align: center; }
+      .modal-box { grid-template-columns: 1fr; }
+      .modal-photo-col { min-height: 260px; }
+      .modal-photo-col img { border-radius: 11px 11px 0 0; }
+      .modal-info-col { padding: 24px 20px; }
+      .modal-name { font-size: 24px; }
+      .package-row { grid-template-columns: 1fr; gap: 16px; }
+      .classes-grid-new { grid-template-columns: 1fr; gap: 2px; }
+      .schedule-row { grid-template-columns: 1fr; gap: 12px; }
+      .schedule-meta { flex-direction: row; align-items: center; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Veien til <span>Paralympics</span></a>
+  <a href="#sponsor" class="nav-cta">Bli sponsor</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+  <p class="hero-label">Norges Paralandslag i Klatring · LA28</p>
+  <h1>Veien til <em>Paralympics</em></h1>
+  <p class="hero-sub">Klatring er på paralympics-programmet for første gang. En norsk medalje i Los Angeles 2028 vil være historisk. Vi er på vei dit.</p>
+  </div>
+  <div class="hero-scroll" style="position:relative;z-index:1;">
+    <div class="hero-scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- VIDEO -->
+<div class="video-section">
+  <div class="video-wrapper">
+    <!-- Bytt ut med: <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+    <div class="video-placeholder">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p>Video legges inn her</p>
+    </div>
+  </div>
+</div>
+
+<!-- ATHLETES -->
+<section class="athletes-section">
+  <div class="section-header fade-up">
+    <span class="section-label">Utøverne</span>
+    <h2>Medalje­kandidatene</h2>
+    <p>Fire norske medaljekandidater med ambisjoner om å skrive klatrehistorie i Los Angeles 2028.</p>
+  </div>
+  <!-- Featured: Kim -->
+  <div class="athlete-featured fade-up"
+    data-athlete="true"
+    data-name="Kim Rishaug"
+    data-class="RP1"
+    data-photo="kim_rishaug.jpg"
+    data-bio="Kim er en av Norges fremste paraklatrere og en reell medaljekandidat i Los Angeles 2028. Med sterk teknikk og et skarpt konkurranseinstinkt har han de siste årene tatt store steg i det internasjonale klatremiljøet. En norsk medalje i RP1 er innen rekkevidde."
+    data-result="🥈 Sølv · Open Italian Para Climbing Championship 2026">
+    <div class="athlete-featured-photo">
+      <img src="kim_rishaug.jpg" alt="Kim Rishaug">
+    </div>
+    <div class="athlete-featured-info">
+      <p class="athlete-class">RP1</p>
+      <h3>Kim Rishaug</h3>
+      <p>Kim er en reell medaljekandidat i Los Angeles 2028. Med sterk teknikk og konkurranseinstinkt har han tatt store steg internasjonalt. En norsk medalje i RP1 er innen rekkevidde.</p>
+      <div class="athlete-result"><span>🥈</span> Sølv · Open Italian Para Climbing Championship 2026</div>
+    </div>
+  </div>
+
+  <!-- Row: Isak, Sebastian, Solveig -->
+  <div class="athletes-row">
+    <div class="athlete-card fade-up delay-1"
+      data-athlete="true"
+      data-name="Isak Ripman"
+      data-class="AU2"
+      data-photo="isak_ripman.jpg"
+      data-bio="Isak er en reell medaljekandidat i AU2 i Los Angeles 2028. Med 4. plass i finalen i Arco 2026 viste han at han hører hjemme blant de aller beste i verden. Han klatrer med ro og presisjon, og har ambisjoner om å stå øverst på pallen i LA."
+      data-result="4. plass · Para Climbing World Cup Arco 2026">
+      <div class="athlete-photo"><img src="isak_ripman.jpg" alt="Isak Ripman"></div>
+      <div class="athlete-info">
+        <p class="athlete-class">AU2</p>
+        <h3>Isak Ripman</h3>
+        <p>Medaljekandidat i AU2. 4. plass i finalen i Arco 2026, blant verdens beste.</p>
+      </div>
+    </div>
+    <div class="athlete-card fade-up delay-2"
+      data-athlete="true"
+      data-name="Sebastian Menze"
+      data-class="AL2"
+      data-photo="sebastian_menze.jpg"
+      data-bio="Sebastian er en medaljekandidat i AL2 i Los Angeles 2028. Han kombinerer god teknikk med sterk fysisk kapasitet, og er en reell trussel mot verdens beste. Med ambisjoner om medalje i LA jobber han hardt for å ta steget helt til topps."
+      data-result="">
+      <div class="athlete-photo"><img src="sebastian_menze.jpg" alt="Sebastian Menze"></div>
+      <div class="athlete-info">
+        <p class="athlete-class">AL2</p>
+        <h3>Sebastian Menze</h3>
+        <p>Medaljekandidat i AL2. Sterk teknikk og fysisk kapasitet på internasjonalt toppnivå.</p>
+      </div>
+    </div>
+    <div class="athlete-card fade-up delay-3"
+      data-athlete="true"
+      data-name="Solveig Gravdal"
+      data-class="AU2"
+      data-photo="solveig_gravdal.jpg"
+      data-bio="Solveig er en erfaren AU2-utøver som har representert Norge internasjonalt i flere år. Med bred konkurranseerfaring og god kunnskap om hva som kreves på toppen, er hun en viktig del av det norske paralandslaget på veien mot Los Angeles 2028."
+      data-result="">
+      <div class="athlete-photo"><img src="solveig_gravdal.jpg" alt="Solveig Gravdal"></div>
+      <div class="athlete-info">
+        <p class="athlete-class">AU2</p>
+        <h3>Solveig Gravdal</h3>
+        <p>Erfaren AU2-utøver med blikket fast rettet mot LA28.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COACH -->
+  <div class="coach-card fade-up">
+    <div class="coach-photo"><img src="grant_harrison.jpg" alt="Grant Harrison"></div>
+    <div>
+      <p class="coach-role">Landslagstrener</p>
+      <h3>Grant Harrison</h3>
+      <p>Grant Harrison leder det norske paralandslaget i klatring og har ansvaret for utvikling og forberedelser mot Paralympics i Los Angeles 2028.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number"><span>1.</span> gang</div>
+      <div class="stat-label">Klatring på Paralympics</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Norske medalje­kandidater</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">8</div>
+      <div class="stat-label">Medalje-events i LA28</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2028</div>
+      <div class="stat-label">Los Angeles · Målåret</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-inner">
+    <blockquote>"Vi har en historisk mulighet. Klatring er på paralympics for første gang, og vi er her for å ta det fullt ut."</blockquote>
+    <p class="quote-author">Grant Harrison · Landslagstrener</p>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="countdown-section">
+  <span class="section-label">Nedtelling</span>
+  <p class="countdown-title">Los Angeles · 15. august 2028</p>
+  <div class="countdown-grid">
+    <div class="countdown-item">
+      <div class="countdown-number" id="cd-days">—</div>
+      <div class="countdown-unit">Dager</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-item">
+      <div class="countdown-number" id="cd-hours">—</div>
+      <div class="countdown-unit">Timer</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-item">
+      <div class="countdown-number" id="cd-minutes">—</div>
+      <div class="countdown-unit">Minutter</div>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-item">
+      <div class="countdown-number" id="cd-seconds">—</div>
+      <div class="countdown-unit">Sekunder</div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<div class="intro-outer">
+<section class="intro-section">
+  <span class="section-label">Prosjektet</span>
+  <h2>En historisk mulighet for norsk klatring</h2>
+  <p>For første gang i historien er paraklatring med i Paralympics. I Los Angeles i august 2028 vil utøvere med funksjonsnedsettelse konkurrere på verdens største parasportscene, og norske utøvere er blant de fremste kandidatene.</p>
+  <p>En norsk medalje vil ikke bare være historisk for klatringen. Det vil sette norsk parasport på kartet på en helt ny måte. Vi jobber systematisk mot dette målet, og vi trenger partnere som vil være med på reisen.</p>
+</section>
+</div>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-header">
+    <span class="section-label">Veien dit</span>
+    <h2>Tidslinje mot LA28</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item current">
+      <div class="timeline-content">
+        <p class="timeline-date">2026 – Vi er her</p>
+        <h3>Trening og norgescup</h3>
+        <p>Paralandslaget bygger form og erfaring. Nasjonale konkurranser og internasjonale tester forbereder utøverne mot kvalifiseringssesongen.</p>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-spacer"></div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <p class="timeline-date">2027</p>
+        <h3>VM Paraklatring – Brno, Tsjekkia</h3>
+        <p>Første store kvalifiseringsmulighet. De tre høyest rangerte i hvert medalje-event kvalifiserer seg til LA28, under forutsetning av landkvoter.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <p class="timeline-date">2028</p>
+        <h3>World Para Climbing Qualifier</h3>
+        <p>Andre og siste sjanse til å kvalifisere seg. 24 utøvere (12 menn, 12 kvinner) sikrer plassene sine her.</p>
+      </div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-spacer"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-spacer"></div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <p class="timeline-date">15.–27. august 2028</p>
+        <h3>Paralympic Games – Los Angeles</h3>
+        <p>Klatring på Long Beach Climbing Theater. Åtte medalje-events. Et historisk øyeblikk for sporten, og en mulighet for Norge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSOR PACKAGES -->
+<section class="sponsor-section" id="sponsor">
+  <div class="sponsor-inner">
+    <div class="section-header fade-up">
+      <span class="section-label">Samarbeid</span>
+      <h2>Vær med på laget vårt</h2>
+      <p>Som sponsor er du synlig på en av verdens største sportarenaer, og en del av et prosjekt som skriver klatrehistorie.</p>
+    </div>
+    <div class="packages-list fade-up">
+      <div class="package-row">
+        <div class="package-left">
+          <p class="package-number">Nivå 01</p>
+          <h3>Hoved­sponsor</h3>
+        </div>
+        <ul class="package-features">
+          <li>Logo på landslagsdraktene</li>
+          <li>Eksponering på veientilparalympics.no</li>
+          <li>Innholdsproduksjon og historier fra utøverne</li>
+          <li>Tilstedeværelse i LA28, omtale og synlighet</li>
+          <li>Eksklusiv tilgang til landslagets events</li>
+          <li>Skreddersydd samarbeidsavtale</li>
+        </ul>
+      </div>
+      <div class="package-row">
+        <div class="package-left">
+          <p class="package-number">Nivå 02</p>
+          <h3>Partner</h3>
+        </div>
+        <ul class="package-features">
+          <li>Logo på profilmateriell</li>
+          <li>Eksponering på nettside og sosiale medier</li>
+          <li>Nevnes i pressemeldinger og medieomtale</li>
+          <li>Tilgang til utøvere for innholdsproduksjon</li>
+        </ul>
+      </div>
+      <div class="package-row">
+        <div class="package-left">
+          <p class="package-number">Nivå 03</p>
+          <h3>Bidragsyter</h3>
+        </div>
+        <ul class="package-features">
+          <li>Logo på nettside</li>
+          <li>Omtale i sosiale medier</li>
+          <li>Takknemlighet og synlighet i NKFs kanaler</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sponsor-cta-wrap fade-up">
+      <a href="mailto:klatring@klatring.no" class="cta-button">Ta kontakt</a>
+      <p class="cta-sub">Send oss en e-post på <a href="mailto:klatring@klatring.no">klatring@klatring.no</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section class="classes-section">
+  <div class="section-header fade-up">
+    <span class="section-label">Om sporten</span>
+    <h2>Hva er paraklatring?</h2>
+    <p>Paraklatring er klatring for utøvere med funksjonsnedsettelse. Utøverne konkurrerer i egne klasser og klatrer på vegvegg. Høyest opp vinner.</p>
+  </div>
+  <div class="classes-grid-new fade-up">
+    <div class="class-card-new" data-class="RP">
+      <p class="class-tag">RP</p>
+      <h3>Reduced Power</h3>
+      <p>Nedsatt muskelkraft eller kontroll, for eksempel ved ryggmargsskade. Lavere tall betyr større nedsettelse.</p>
+      <span class="class-la28">RP1 er med i LA28</span>
+    </div>
+    <div class="class-card-new" data-class="AU">
+      <p class="class-tag">AU</p>
+      <h3>Upper Limb</h3>
+      <p>Amputasjon eller funksjonsnedsettelse i arm eller hånd. Spenner fra fingeramputasjon til full armamputasjon.</p>
+      <span class="class-la28">AU2 er med i LA28</span>
+    </div>
+    <div class="class-card-new" data-class="AL">
+      <p class="class-tag">AL</p>
+      <h3>Lower Limb</h3>
+      <p>Amputasjon eller funksjonsnedsettelse i ben eller fot. Klatreren kompenserer med teknikk og kreativitet.</p>
+      <span class="class-la28">AL2 er med i LA28</span>
+    </div>
+    <div class="class-card-new" data-class="B">
+      <p class="class-tag">B</p>
+      <h3>Synshemming</h3>
+      <p>B1 er fullstendig blind og klatrer med ledsager som gir verbale instruksjoner. B2 har delvis syn.</p>
+      <span class="class-la28">B1 menn · B2 kvinner i LA28</span>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section">
+  <div class="section-header fade-up">
+    <span class="section-label">LA28 · 24–27. august 2028</span>
+    <h2>Konkurranseprogrammet</h2>
+    <p>Long Beach Climbing Theater · Long Beach, California</p>
+  </div>
+  <div class="schedule-list fade-up">
+    <div class="schedule-row">
+      <div class="schedule-meta">
+        <span class="schedule-date">Tors 24. aug</span>
+        <span class="schedule-phase">Kvalifisering</span>
+      </div>
+      <div class="schedule-events">
+        <div class="sched-event"><span class="sched-time">09:15</span><span class="sched-desc">Menn AU2 · Menn B1 · Kvinner RP1</span></div>
+        <div class="sched-event"><span class="sched-time">18:00</span><span class="sched-desc">Kvinner AL2 · Menn RP1 · Kvinner B2</span></div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <div class="schedule-meta">
+        <span class="schedule-date">Fre 25. aug</span>
+        <span class="schedule-phase">Finale / kval.</span>
+      </div>
+      <div class="schedule-events">
+        <div class="sched-event"><span class="sched-time">09:15</span><span class="sched-desc">Menn AL2 kval. · Menn B1 finale · Kvinner RP1 finale</span></div>
+        <div class="sched-event"><span class="sched-time">18:00</span><span class="sched-desc">Kvinner AU2 kval. · Menn AU2 finale · Kvinner AL2 finale</span></div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <div class="schedule-meta">
+        <span class="schedule-date">Lør 26. aug</span>
+        <span class="schedule-phase">Finale</span>
+      </div>
+      <div class="schedule-events">
+        <div class="sched-event"><span class="sched-time">17:15</span><span class="sched-desc">Menn RP1 finale · Kvinner B1 finale</span></div>
+      </div>
+    </div>
+    <div class="schedule-row">
+      <div class="schedule-meta">
+        <span class="schedule-date">Søn 27. aug</span>
+        <span class="schedule-phase">Finale</span>
+      </div>
+      <div class="schedule-events">
+        <div class="sched-event"><span class="sched-time">10:00</span><span class="sched-desc">Menn AL2 finale · Kvinner AU2 finale</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="instagram-section">
+  <span class="section-label">Følg reisen</span>
+  <h2>Hold deg oppdatert</h2>
+  <p>Følg paralandslaget på Instagram for innhold fra trening, konkurranser og veien mot LA28.</p>
+  <a href="https://instagram.com/teamnorwayclimbing" target="_blank" class="instagram-handle">
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    @teamnorwayclimbing
+  </a>
+</section>
+
+<!-- ATHLETE MODAL -->
+<div class="athlete-modal" id="athleteModal" role="dialog" aria-modal="true">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Lukk">×</button>
+    <div class="modal-photo-col">
+      <img id="modalPhoto" src="" alt="">
+    </div>
+    <div class="modal-info-col">
+      <p class="modal-class-tag" id="modalClass"></p>
+      <h2 class="modal-name" id="modalName"></h2>
+      <p class="modal-bio" id="modalBio"></p>
+      <div class="modal-result" id="modalResult" style="display:none"></div>
+      <div class="modal-video-block">
+        <p class="modal-video-label">Video</p>
+        <div id="modalVideoWrap">
+          <div class="modal-video-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p>Video legges inn her</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Norges Klatreforbund · <a href="https://klatring.no">klatring.no</a></p>
+  <p><a href="mailto:klatring@klatring.no">klatring@klatring.no</a></p>
+  <p>veientilparalympics.no</p>
+</footer>
+
+<script>
+  // ATHLETE MODAL
+  const modal = document.getElementById('athleteModal');
+  const modalPhoto = document.getElementById('modalPhoto');
+  const modalClass = document.getElementById('modalClass');
+  const modalName = document.getElementById('modalName');
+  const modalBio = document.getElementById('modalBio');
+  const modalResult = document.getElementById('modalResult');
+
+  function openModal(el) {
+    modalPhoto.src = el.dataset.photo;
+    modalPhoto.alt = el.dataset.name;
+    modalClass.textContent = el.dataset.class;
+    modalName.textContent = el.dataset.name;
+    modalBio.textContent = el.dataset.bio;
+    const result = el.dataset.result;
+    if (result) {
+      modalResult.textContent = result;
+      modalResult.style.display = 'flex';
+    } else {
+      modalResult.style.display = 'none';
+    }
+    // Video: hvis data-video er satt, embed YouTube, ellers placeholder
+    const videoId = el.dataset.video;
+    const wrap = document.getElementById('modalVideoWrap');
+    if (videoId) {
+      wrap.innerHTML = `<iframe class="modal-video-iframe" src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
+    } else {
+      wrap.innerHTML = `<div class="modal-video-placeholder"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><p>Video legges inn her</p></div>`;
+    }
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-athlete="true"]').forEach(el => {
+    el.addEventListener('click', () => openModal(el));
+  });
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalBackdrop').addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // COUNTDOWN
+  const target = new Date('2028-08-15T09:00:00-07:00');
+  function updateCountdown() {
+    const diff = target - new Date();
+    if (diff <= 0) return;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-minutes').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-seconds').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // FADE UP ON SCROLL
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => fadeObserver.observe(el));
+
+  // STAT COUNTER
+  function animateCount(el, target, duration) {
+    const isText = isNaN(parseInt(target));
+    if (isText) { el.textContent = target; return; }
+    const num = parseInt(target);
+    const start = performance.now();
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(ease * num);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+  const statNumbers = document.querySelectorAll('.stat-number');
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const raw = e.target.dataset.count;
+        animateCount(e.target, raw, 1200);
+        statObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNumbers.forEach(el => {
+    el.dataset.count = el.textContent.trim();
+    el.textContent = '0';
+    statObserver.observe(el);
+  });
+
+  // HERO PARALLAX
+  window.addEventListener('scroll', () => {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    const scrollY = window.scrollY;
+    hero.style.backgroundPositionY = `calc(70% + ${scrollY * 0.3}px)`;
+  }, { passive: true });
+</script>
+</body>
+</html>

@@ -924,7 +924,7 @@
     data-class="RP1"
     data-photo="kim_rishaug.jpg"
     data-bio="Kim er en av Norges fremste paraklatrere og en reell medaljekandidat i Los Angeles 2028. Med sterk teknikk og et skarpt konkurranseinstinkt har han de siste årene tatt store steg i det internasjonale klatremiljøet. En norsk medalje i RP1 er innen rekkevidde."
-    data-result="🥈 Sølv · Open Italian Para Climbing Championship 2026">
+    data-result="🥇 Gull World Climbing Para Series Innsbruck 2026 · 🥈 Sølv European Para Championship Laval 2026 · 🥉 Bronse VM paraklatring 2025">
     <div class="athlete-featured-photo">
       <img src="kim_rishaug.jpg" alt="Kim Rishaug">
     </div>
@@ -944,7 +944,8 @@
       data-class="AU2"
       data-photo="isak_ripman.jpg"
       data-bio="Isak er en reell medaljekandidat i AU2 i Los Angeles 2028. Med 4. plass i finalen i Arco 2026 viste han at han hører hjemme blant de aller beste i verden. Han klatrer med ro og presisjon, og har ambisjoner om å stå øverst på pallen i LA."
-      data-result="4. plass · Para Climbing World Cup Arco 2026">
+      data-result="🥈 Sølv European Para Championship Laval 2026 · 🥈 Sølv World Climbing Para Series Innsbruck 2026"
+      data-video="isak_video_small.mp4"
       <div class="athlete-photo"><img src="isak_ripman.jpg" alt="Isak Ripman"></div>
       <div class="athlete-info">
         <p class="athlete-class">AU2</p>
@@ -958,7 +959,7 @@
       data-class="AL2"
       data-photo="sebastian_menze.jpg"
       data-bio="Sebastian er en medaljekandidat i AL2 i Los Angeles 2028. Han kombinerer god teknikk med sterk fysisk kapasitet, og er en reell trussel mot verdens beste. Med ambisjoner om medalje i LA jobber han hardt for å ta steget helt til topps."
-      data-result="">
+      data-result="🥈 Sølv European Para Championship Laval 2026 · 🥉 Bronse World Climbing Para Series Innsbruck 2026">
       <div class="athlete-photo"><img src="sebastian_menze.jpg" alt="Sebastian Menze"></div>
       <div class="athlete-info">
         <p class="athlete-class">AL2</p>
@@ -1268,6 +1269,7 @@
       <h2 class="modal-name" id="modalName"></h2>
       <p class="modal-bio" id="modalBio"></p>
       <div class="modal-result" id="modalResult" style="display:none"></div>
+      <div id="modalVideoWrap" style="margin-top:16px;"></div>
     </div>
   </div>
 </div>
@@ -1311,6 +1313,13 @@
     } else {
       modalResult.style.display = 'none';
     }
+    const wrap = document.getElementById('modalVideoWrap');
+    const videoSrc = el.dataset.video;
+    if (videoSrc) {
+      wrap.innerHTML = `<video src="${videoSrc}" autoplay muted loop playsinline controls style="width:100%;border-radius:8px;margin-top:4px;max-height:260px;object-fit:cover;"></video>`;
+    } else {
+      wrap.innerHTML = '';
+    }
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1318,6 +1327,8 @@
   function closeModal() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
+    const v = document.querySelector('#modalVideoWrap video');
+    if (v) v.pause();
   }
 
   document.querySelectorAll('[data-athlete="true"]').forEach(el => {

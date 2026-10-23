@@ -874,9 +874,11 @@
       .stat-item:last-child { border-bottom: none; }
       .coach-card { flex-direction: column; text-align: center; }
       footer { flex-direction: column; text-align: center; }
-      .modal-box { grid-template-columns: 1fr; }
-      .modal-photo-col { min-height: 260px; }
-      .modal-photo-col img { border-radius: 11px 11px 0 0; }
+      .athletes-row { grid-template-columns: repeat(2, 1fr); }
+      .athlete-photo { aspect-ratio: 1/1; }
+      .modal-box { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; }
+      .modal-photo-col { min-height: 280px; }
+      .modal-photo-col img, #modalVideoInline video { border-radius: 11px 11px 0 0 !important; width: 100% !important; height: 280px !important; object-fit: cover; }
       .modal-info-col { padding: 24px 20px; }
       .modal-name { font-size: 24px; }
       .package-row { grid-template-columns: 1fr; gap: 16px; }
@@ -1266,15 +1268,15 @@
   <div class="modal-backdrop" id="modalBackdrop"></div>
   <div class="modal-box">
     <button class="modal-close" id="modalClose" aria-label="Lukk">×</button>
-    <div class="modal-photo-col">
+    <div class="modal-photo-col" id="modalMediaCol">
       <img id="modalPhoto" src="" alt="">
+      <div id="modalVideoInline" style="display:none; width:100%; height:100%;"></div>
     </div>
     <div class="modal-info-col">
       <p class="modal-class-tag" id="modalClass"></p>
       <h2 class="modal-name" id="modalName"></h2>
       <p class="modal-bio" id="modalBio"></p>
       <div class="modal-result" id="modalResult" style="display:none"></div>
-      <div id="modalVideoWrap" style="margin-top:16px;"></div>
     </div>
   </div>
 </div>
@@ -1318,12 +1320,16 @@
     } else {
       modalResult.style.display = 'none';
     }
-    const wrap = document.getElementById('modalVideoWrap');
     const videoSrc = el.dataset.video;
+    const modalVideoInline = document.getElementById('modalVideoInline');
     if (videoSrc) {
-      wrap.innerHTML = `<video src="${videoSrc}" autoplay muted loop playsinline controls style="height:340px;width:auto;max-width:100%;border-radius:8px;margin-top:12px;display:block;"></video>`;
+      modalPhoto.style.display = 'none';
+      modalVideoInline.style.display = 'block';
+      modalVideoInline.innerHTML = `<video src="${videoSrc}" autoplay muted loop playsinline controls style="width:100%;height:100%;object-fit:cover;border-radius:11px 0 0 11px;display:block;"></video>`;
     } else {
-      wrap.innerHTML = '';
+      modalPhoto.style.display = 'block';
+      modalVideoInline.style.display = 'none';
+      modalVideoInline.innerHTML = '';
     }
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1332,7 +1338,7 @@
   function closeModal() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
-    const v = document.querySelector('#modalVideoWrap video');
+    const v = document.querySelector('#modalVideoInline video');
     if (v) v.pause();
   }
 
